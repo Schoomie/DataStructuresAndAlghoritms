@@ -28,7 +28,7 @@ public class Main {
         else{
             System.out.println("tool8m8");
         }
-
+//comparable vs comparator
 
     }
     public static void printList(List<Theatre.Seat> list){
