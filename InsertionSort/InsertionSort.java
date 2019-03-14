@@ -3,7 +3,7 @@ package InsertionSort;
 import java.util.List;
 
 
-class InsertionSort {
+abstract class InsertionSort {
 
 
     public static List<Integer> sort(List<Integer> a) {
