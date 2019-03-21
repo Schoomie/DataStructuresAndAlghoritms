@@ -1,7 +1,80 @@
 package MergeSort;
 
-/**
- * Created by Kuba on 14/03/2019.
- */
+import java.util.ArrayList;
 public class MergeSort {
+
+        private ArrayList<String> strList;
+
+        // Constructor
+        public MergeSort(ArrayList<String> input) {
+                strList = input;
+        }
+
+        public void sort() {
+                strList = mergeSort(strList);
+        }
+
+        public ArrayList<String> mergeSort(ArrayList<String> whole) {
+                ArrayList<String> left = new ArrayList<>();
+                ArrayList<String> right = new ArrayList<>();
+                int center;
+
+                if (whole.size() == 1) {
+                        return whole;
+                } else {
+                        center = whole.size() / 2;
+                        for (int i = 0; i < center; i++) {
+                                left.add(whole.get(i));
+                        }
+
+                        for (int i = center; i < whole.size(); i++) {
+                                right.add(whole.get(i));
+                        }
+
+                        left = mergeSort(left);
+                        right = mergeSort(right);
+
+                        merge(left, right, whole);
+                }
+                return whole;
+        }
+
+        private void merge(ArrayList<String> left, ArrayList<String> right, ArrayList<String> whole) {
+                int leftIndex = 0;
+                int rightIndex = 0;
+                int wholeIndex = 0;
+
+                while (leftIndex < left.size() && rightIndex < right.size()) {
+                        if ((left.get(leftIndex).compareTo(right.get(rightIndex))) < 0) {
+                                whole.set(wholeIndex, left.get(leftIndex));
+                                leftIndex++;
+                        } else {
+                                whole.set(wholeIndex, right.get(rightIndex));
+                                rightIndex++;
+                        }
+                        wholeIndex++;
+                }
+
+                ArrayList<String> rest;
+                int restIndex;
+                if (leftIndex >= left.size()) {
+                        rest = right;
+                        restIndex = rightIndex;
+                } else {
+                        rest = left;
+                        restIndex = leftIndex;
+                }
+
+                for (int i = restIndex; i < rest.size(); i++) {
+                        whole.set(wholeIndex, rest.get(i));
+                        wholeIndex++;
+                }
+        }
+
+        public void show() {
+                System.out.println("Sorted:");
+                for (int i = 0; i < strList.size(); i++) {
+                        System.out.println(strList.get(i));
+                }
+        }
 }
